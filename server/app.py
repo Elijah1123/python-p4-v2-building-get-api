@@ -18,7 +18,6 @@ db.init_app(app)
 def index():
     return "Index for Game/Review/User API"
 
-# start building your API here
 @app.route('/games')
 def games():
 
@@ -48,7 +47,7 @@ def game_by_id(id):
 def game_users_by_id(id):
     game = Game.query.filter(Game.id == id).first()
 
-    # use association proxy to get users for a game
+    
     users = [user.to_dict(rules=("-reviews",)) for user in game.users]
     response = make_response(
         users,
